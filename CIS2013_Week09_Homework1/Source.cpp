@@ -9,6 +9,9 @@ int main() {
 	bool validEncryptionFile = false;
 	int encryptionFile = 0;
 	char keepAlive = 'y';
+	bool validCrypt = false;
+	char crypt = 'y';
+
 	//When the application is run…
 	//	Application asks for a filename to load
 	//	Player enters a filename(ex: leve1.dat) and the application loads the file if available, or requests another filename if not available.
@@ -43,6 +46,23 @@ int main() {
 		else { 
 			validEncryptionFile = true;
 		}
+	}
+//	After loading the file, the application will ask if you want to “encrypt” or “decrypt” a message.Depending on the selection the application will :
+//  ### Encrpyt
+//	The application asks for the message you want to “encrypt.”  The user types in the message, for example :
+//		This is my message, it is super secret.
+//		The application will then use file characters as values and add those values to the message characters.  (a = 1, b = 2, c = 3, z = 26, space = 27, etc..) So for the first word of our message we would take the first 4 characters from our file
+
+	while (validCrypt == false) {
+		cout << "Type e to Encrypt or type d to Decrypt: ";
+		cin >> crypt;
+		if (crypt == 'e' || crypt == 'd') {
+			validCrypt = true;
+		}
+	}
+	if (crypt == 'e') {
+		cout << endl << endl << "ENCRYPTION. Please type the message you wich to encrypt: "<< endl;
+
 	}
 
 	cout << "debug 1";
