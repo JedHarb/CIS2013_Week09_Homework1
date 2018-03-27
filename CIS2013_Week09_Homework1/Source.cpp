@@ -4,6 +4,124 @@
 #include<string> 
 using namespace std;
 
+int charToIntValue(char i)
+{
+	int value = 0;
+	switch (i) {
+	case 'a':
+	case 'A':
+		value = 1;
+		break;
+	case 'b':
+	case 'B':
+		value = 2;
+		break;
+	case 'c':
+	case 'C':
+		value = 3;
+		break;
+	case 'd':
+	case 'D':
+		value = 4;
+		break;
+	case 'e':
+	case 'E':
+		value = 5;
+		break;
+	case 'f':
+	case 'F':
+		value = 6;
+		break;
+	case 'g':
+	case 'G':
+		value = 7;
+		break;
+	case 'h':
+	case 'H':
+		value = 8;
+		break;
+	case 'i':
+	case 'I':
+		value = 9;
+		break;
+	case 'j':
+	case 'J':
+		value = 10;
+		break;
+	case 'k':
+	case 'K':
+		value = 11;
+		break;
+	case 'l':
+	case 'L':
+		value = 12;
+		break;
+	case 'm':
+	case 'M':
+		value = 13;
+		break;
+	case 'n':
+	case 'N':
+		value = 14;
+		break;
+	case 'o':
+	case 'O':
+		value = 15;
+		break;
+	case 'p':
+	case 'P':
+		value = 16;
+		break;
+	case 'q':
+	case 'Q':
+		value = 17;
+		break;
+	case 'r':
+	case 'R':
+		value = 18;
+		break;
+	case 's':
+	case 'S':
+		value = 19;
+		break;
+	case 't':
+	case 'T':
+		value = 20;
+		break;
+	case 'u':
+	case 'U':
+		value = 21;
+		break;
+	case 'v':
+	case 'V':
+		value = 22;
+		break;
+	case 'w':
+	case 'W':
+		value = 23;
+		break;
+	case 'x':
+	case 'X':
+		value = 24;
+		break;
+	case 'y':
+	case 'Y':
+		value = 25;
+		break;
+	case 'z':
+	case 'Z':
+		value = 26;
+		break;
+	case ' ':
+		value = 27;
+		break;
+	default:
+		cout << " Something went wrong. ";
+	}
+	return value;
+}
+
+
 int main() {
 
 	bool validEncryptionFile = false;
@@ -11,6 +129,7 @@ int main() {
 	char keepAlive = 'y';
 	bool validCrypt = false;
 	char crypt = 'y';
+	string userInput;
 
 	//When the application is run…
 	//	Application asks for a filename to load
@@ -51,7 +170,7 @@ int main() {
 //  ### Encrpyt
 //	The application asks for the message you want to “encrypt.”  The user types in the message, for example :
 //		This is my message, it is super secret.
-//		The application will then use file characters as values and add those values to the message characters.  (a = 1, b = 2, c = 3, z = 26, space = 27, etc..) So for the first word of our message we would take the first 4 characters from our file
+//		The application will then use file characters as values and add those values to the message characters.  (a = 1, b = 2, c = 3, z = 26, space = 27, etc..)
 
 	while (validCrypt == false) {
 		cout << "Type e to Encrypt or type d to Decrypt: ";
@@ -61,12 +180,17 @@ int main() {
 		}
 	}
 	if (crypt == 'e') {
-		cout << endl << endl << "ENCRYPTION. Please type the message you wich to encrypt: "<< endl;
+		cout << endl << endl << "ENCRYPTION. Please type the message you wish to encrypt: " << endl;
+		cin.ignore();
+		getline(cin, userInput);
 
+		//for each caharacter in string
+		//charToIntValue(i);
 	}
+	cout << "That is " << userInput.length() << " characters long.";
 
-	cout << "debug 1";
 	in_a.close(); //always close the file when you are done reading it, prevent file corruption
+	cout << "debug 1";
 	cin >> keepAlive; //keep the program from closing the window until the user inputs something
 	return 0;
 }
