@@ -116,7 +116,7 @@ int charToIntValue(char i)
 		value = 27;
 		break;
 	default:
-		cout << " Something went wrong. ";
+		cout << "(not a character or space)";
 	}
 	return value;
 }
@@ -131,6 +131,7 @@ int main() {
 	char crypt = 'y';
 	string userInput;
 	int i = 0;
+	int charValue = 0;
 
 	//When the application is run…
 	//	Application asks for a filename to load
@@ -180,14 +181,15 @@ int main() {
 		}
 	}
 	if (crypt == 'e') {
-		cout << endl << endl << "ENCRYPTION. Please type the message you wish to encrypt: " << endl;
+		cout << endl << "ENCRYPTION. Please type the message you wish to encrypt: " << endl;
 		cin.ignore();
 		getline(cin, userInput);
 		cout << endl << "That is " << userInput.length() << " characters long." << endl;
+		cout << "Your message translated to numbers is: " << endl;
 		for (i = 0; i < userInput.length(); i++) {
-			//userInput[i] = charToIntValue(userInput[i]);
-			cout << userInput[i];
-		}
+			charValue = charToIntValue(userInput[i]);
+			cout << charValue <<" ";
+		} 
 
 		//for each caharacter in string
 		//charToIntValue(i);
