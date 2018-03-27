@@ -130,6 +130,8 @@ int main() {
 	bool validCrypt = false;
 	char crypt = 'y';
 	string userInput;
+	int x = 0;
+	char y[500];
 	int i = 0;
 	int charValue = 0;
 
@@ -181,6 +183,10 @@ int main() {
 		}
 	}
 	if (crypt == 'e') {
+		for (x = 0; x < 500; x++) {
+			in_a >> y[x]; //set our array to match the ecryption file
+			cout << y[x]; //this is just a test. Currently does not output spaces, even if we set array y to be a string.
+		}
 		cout << endl << "ENCRYPTION. Please type the message you wish to encrypt: " << endl;
 		cin.ignore();
 		getline(cin, userInput);
@@ -188,11 +194,9 @@ int main() {
 		cout << "Your message translated to numbers is: " << endl;
 		for (i = 0; i < userInput.length(); i++) {
 			charValue = charToIntValue(userInput[i]);
+			//charValue = charValue + charToIntValue(); // need to add the value of the user character to the value of the random character from the file
 			cout << charValue <<" ";
 		} 
-
-		//for each caharacter in string
-		//charToIntValue(i);
 	}
 
 
