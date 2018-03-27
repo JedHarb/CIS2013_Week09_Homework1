@@ -130,6 +130,7 @@ int main() {
 	bool validCrypt = false;
 	char crypt = 'y';
 	string userInput;
+	int i = 0;
 
 	//When the application is run…
 	//	Application asks for a filename to load
@@ -166,10 +167,9 @@ int main() {
 			validEncryptionFile = true;
 		}
 	}
-//	After loading the file, the application will ask if you want to “encrypt” or “decrypt” a message.Depending on the selection the application will :
+//	After loading the file, the application will ask if you want to “encrypt” or “decrypt” a message. Depending on the selection the application will :
 //  ### Encrpyt
-//	The application asks for the message you want to “encrypt.”  The user types in the message, for example :
-//		This is my message, it is super secret.
+//	The application asks for the message you want to “encrypt.”  The user types in the message.
 //		The application will then use file characters as values and add those values to the message characters.  (a = 1, b = 2, c = 3, z = 26, space = 27, etc..)
 
 	while (validCrypt == false) {
@@ -183,14 +183,19 @@ int main() {
 		cout << endl << endl << "ENCRYPTION. Please type the message you wish to encrypt: " << endl;
 		cin.ignore();
 		getline(cin, userInput);
+		cout << endl << "That is " << userInput.length() << " characters long." << endl;
+		for (i = 0; i < userInput.length(); i++) {
+			//userInput[i] = charToIntValue(userInput[i]);
+			cout << userInput[i];
+		}
 
 		//for each caharacter in string
 		//charToIntValue(i);
 	}
-	cout << "That is " << userInput.length() << " characters long.";
+
 
 	in_a.close(); //always close the file when you are done reading it, prevent file corruption
-	cout << "debug 1";
+	cout << " debug 1 ";
 	cin >> keepAlive; //keep the program from closing the window until the user inputs something
 	return 0;
 }
