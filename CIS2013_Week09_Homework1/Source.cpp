@@ -117,7 +117,7 @@ int charToIntValue(char i)
 		value = 27;
 		break;
 	default:
-		cout << "(you typed something that isn't character or space)";
+		cout << "(you typed something that isn't a character or space)";
 	}
 	return value;
 }
@@ -268,7 +268,7 @@ int main() {
 
 	for (i = 0; i < 500; i++) { //set our array to match the one time pad
 		in_a >> matchFile[i];
-		//cout << matchFile[i]; //verify output. I spent 4 hours trying to make this work with the blank space character and failed. Gotta cut my losses and move on at some point. Setting all .dat file text to alphabetic-only and modulus 26 later on.
+		//cout << matchFile[i]; //verify output. I spent 4 hours trying to make this work with the blank space character in the one-time-pad and failed. Gotta cut my losses and move on at some point. Setting all .dat file text to alphabetic-only. UPDATE: Program works properly.
 	}
 
 
@@ -322,7 +322,6 @@ int main() {
 		if (crypt == 'x') {
 			programContinue = false;
 		}
-
 		validCrypt = false;
 	}
 
