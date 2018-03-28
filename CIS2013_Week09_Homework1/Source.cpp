@@ -122,6 +122,95 @@ int charToIntValue(char i)
 	return value;
 }
 
+char intValueToChar(int i) {
+	char x = 'a';
+	switch (i) {
+	case 1:
+		x = 'a';
+		break;
+	case 2:
+		x = 'b';
+		break;
+	case 3:
+		x = 'c';
+		break;
+	case 4:
+		x = 'd';
+		break;
+	case 5:
+		x = 'e';
+		break;
+	case 6:
+		x = 'f';
+		break;
+	case 7:
+		x = 'g';
+		break;
+	case 8:
+		x = 'h';
+		break;
+	case 9:
+		x = 'i';
+		break;
+	case 10:
+		x = 'j';
+		break;
+	case 11:
+		x = 'k';
+		break;
+	case 12:
+		x = 'l';
+		break;
+	case 13:
+		x = 'm';
+		break;
+	case 14:
+		x = 'n';
+		break;
+	case 15:
+		x = 'o';
+		break;
+	case 16:
+		x = 'p';
+		break;
+	case 17:
+		x = 'q';
+		break;
+	case 18:
+		x = 'r';
+		break;
+	case 19:
+		x = 's';
+		break;
+	case 20:
+		x = 't';
+		break;
+	case 21:
+		x = 'u';
+		break;
+	case 22:
+		x = 'v';
+		break;
+	case 23:
+		x = 'w';
+		break;
+	case 24:
+		x = 'x';
+		break;
+	case 25:
+		x = 'y';
+		break;
+	case 26:
+		x = 'z';
+		break;
+	case 27:
+		x = ' ';
+		break;
+	default:
+		cout << "You shouldn't see this";
+	}
+	return x;
+}
 
 int main() {
 
@@ -129,6 +218,7 @@ int main() {
 	int encryptionFile = 0;
 	char keepAlive = 'y';
 	bool validCrypt = false;
+	bool programContinue = true;
 	char crypt = 'y';
 	string userInput;
 	int x = 0;
@@ -176,29 +266,45 @@ int main() {
 //	The application asks for the message you want to “encrypt.”  The user types in the message.
 //		The application will then use file characters as values and add those values to the message characters.  (a = 1, b = 2, c = 3, z = 26, space = 27, etc..)
 
+	for (i = 0; i < 500; i++) { //set our array to match the one time pad
+		in_a >> matchFile[i];
+		//cout << matchFile[i]; //verify output. I spent 4 hours trying to make this work with the blank space character and failed. Gotta cut my losses and move on at some point. Setting all .dat file text to alphabetic-only and modulus 26 later on.
+	}
+
 	while (validCrypt == false) {
-		cout << "Type e to Encrypt or type d to Decrypt: ";
+		cout << "Type e to Encrypt, type d to Decrypt, or type x to exit: ";
 		cin >> crypt;
-		if (crypt == 'e' || crypt == 'd') {
+		if (crypt == 'e' || crypt == 'd' || crypt == 'x') {
 			validCrypt = true;
 		}
 	}
-	if (crypt == 'e') {
 
-		for (i = 0; i < 500; i++) { //set our array to match the one time pad
-			in_a >> matchFile[i];
-			//cout << matchFile[i]; //verify output. I spent 4 hours trying to make this work with the blank space character and failed. Gotta cut my losses and move on at some point. Setting all .dat file text to numeric-only and modulus 26 later on.
+	while (programContinue == true) {
+		if (crypt == 'e') {
+			cout << endl << "ENCRYPTION. Please type the message you wish to encrypt. Letters and spaces only, and under 500 characters please or this thing will break: " << endl;
+			cin.ignore();
+			getline(cin, userInput);
+			// cout << endl << "That is " << userInput.length() << " characters long." << endl; //legnth test
+			cout << "Encryption complete. Your new message is: " << endl;
+			for (i = 0; i < userInput.length(); i++) {
+				charValue = charToIntValue(userInput[i]); //calulate the numerical value of each character in the user input
+				charValue = charValue + charToIntValue(matchFile[i]); // add the value of the user character to the value of the random character from the file
+				// cout << charValue << " "; // Your message translated to numbers, plus the encryption key file translated to numbers.
+				if (charValue > 27) {
+					charValue - 26;
+				}
+				cout << intValueToChar(charValue);
+			}
 		}
-		cout << endl << "ENCRYPTION. Please type the message you wish to encrypt: " << endl;
-		cin.ignore();
-		getline(cin, userInput);
-		cout << endl << "That is " << userInput.length() << " characters long." << endl;
-		cout << "Your message translated to numbers is: " << endl;
-		for (i = 0; i < userInput.length(); i++) {
-			charValue = charToIntValue(userInput[i]);
-			//charValue = charValue + charToIntValue(); // need to add the value of the user character to the value of the random character from the file
-			cout << charValue << " ";
+		//### Decrypt
+		//The application asks for the secret message you want to “decrypt.”  The user types in the message.
+		//Reverse the process from the encrypt instructions and print the original message to the screen.
+		if (crypt == 'd') {
+			cout << endl << "DECRYPTION. Do you want to decrypt your message?";
+		}
 
+		if (crypt == 'x') {
+			programContinue = false;
 		}
 	}
 
