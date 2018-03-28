@@ -2,6 +2,7 @@
 #include<fstream>
 #include<cstring> //page 459 is a list of c functions.
 #include<string> 
+
 using namespace std;
 
 int charToIntValue(char i)
@@ -131,7 +132,7 @@ int main() {
 	char crypt = 'y';
 	string userInput;
 	int x = 0;
-	char y[500];
+	char matchFile[500];
 	int i = 0;
 	int charValue = 0;
 
@@ -183,9 +184,10 @@ int main() {
 		}
 	}
 	if (crypt == 'e') {
-		for (x = 0; x < 500; x++) {
-			in_a >> y[x]; //set our array to match the ecryption file
-			cout << y[x]; //this is just a test. Currently does not output spaces, even if we set array y to be a string.
+
+		for (i = 0; i < 500; i++) { //set our array to match the one time pad
+			in_a >> matchFile[i];
+			//cout << matchFile[i]; //verify output. I spent 4 hours trying to make this work with the blank space character and failed. Gotta cut my losses and move on at some point. Setting all .dat file text to numeric-only and modulus 26 later on.
 		}
 		cout << endl << "ENCRYPTION. Please type the message you wish to encrypt: " << endl;
 		cin.ignore();
@@ -195,10 +197,10 @@ int main() {
 		for (i = 0; i < userInput.length(); i++) {
 			charValue = charToIntValue(userInput[i]);
 			//charValue = charValue + charToIntValue(); // need to add the value of the user character to the value of the random character from the file
-			cout << charValue <<" ";
-		} 
-	}
+			cout << charValue << " ";
 
+		}
+	}
 
 	in_a.close(); //always close the file when you are done reading it, prevent file corruption
 	cout << " debug 1 ";
