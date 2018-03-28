@@ -117,7 +117,7 @@ int charToIntValue(char i)
 		value = 27;
 		break;
 	default:
-		cout << "(not a character or space)";
+		cout << "(you typed something that isn't character or space)";
 	}
 	return value;
 }
@@ -271,15 +271,18 @@ int main() {
 		//cout << matchFile[i]; //verify output. I spent 4 hours trying to make this work with the blank space character and failed. Gotta cut my losses and move on at some point. Setting all .dat file text to alphabetic-only and modulus 26 later on.
 	}
 
-	while (validCrypt == false) {
-		cout << "Type e to Encrypt, type d to Decrypt, or type x to exit: ";
-		cin >> crypt;
-		if (crypt == 'e' || crypt == 'd' || crypt == 'x') {
-			validCrypt = true;
-		}
-	}
+
 
 	while (programContinue == true) {
+
+		while (validCrypt == false) {
+			cout << "Type e to Encrypt, type d to Decrypt, or type x to exit: ";
+			cin >> crypt;
+			if (crypt == 'e' || crypt == 'd' || crypt == 'x') {
+				validCrypt = true;
+			}
+		}
+
 		if (crypt == 'e') {
 			cout << endl << "ENCRYPTION. Please type the message you wish to encrypt. Letters and spaces only, and under 500 characters please or this thing will break: " << endl;
 			cin.ignore();
@@ -291,25 +294,41 @@ int main() {
 				charValue = charValue + charToIntValue(matchFile[i]); // add the value of the user character to the value of the random character from the file
 				// cout << charValue << " "; // Your message translated to numbers, plus the encryption key file translated to numbers.
 				if (charValue > 27) {
-					charValue - 26;
+					charValue = charValue - 27;
 				}
 				cout << intValueToChar(charValue);
 			}
+			cout << endl;
 		}
 		//### Decrypt
 		//The application asks for the secret message you want to “decrypt.”  The user types in the message.
 		//Reverse the process from the encrypt instructions and print the original message to the screen.
 		if (crypt == 'd') {
-			cout << endl << "DECRYPTION. Do you want to decrypt your message?";
+			cout << endl << "DECRYPTION. Type your encrypted message here: " << endl;
+			cin.ignore();
+			getline(cin, userInput);
+			cout << "Decryption complete. Your message is: " << endl;
+			for (i = 0; i < userInput.length(); i++) {
+				charValue = charToIntValue(userInput[i]); //calulate the numerical value of each character in the user input
+				charValue = charValue - charToIntValue(matchFile[i]); // subtract the value of the user character to the value of the random character from the file
+				if (charValue < 1) {
+					charValue = charValue + 27;
+				}
+				cout << intValueToChar(charValue);
+			}
+			cout << endl;
 		}
 
 		if (crypt == 'x') {
 			programContinue = false;
 		}
+
+		validCrypt = false;
 	}
 
 	in_a.close(); //always close the file when you are done reading it, prevent file corruption
-	cout << " debug 1 ";
+	cout << " End of program ";
 	cin >> keepAlive; //keep the program from closing the window until the user inputs something
 	return 0;
 }
+
